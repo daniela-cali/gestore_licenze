@@ -12,3 +12,8 @@ $routes->group('db', function($routes) {
     $routes->get('/', 'DatabaseInfo::index');
     $routes->get('info', 'DatabaseInfo::info'); 
 });
+
+$routes->group('licenze', function($routes) {
+    $routes->get('/', 'Clienti::index');
+
+});
