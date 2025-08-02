@@ -1,0 +1,145 @@
+Campi trovati (con apici):
+ - 'tbana_tbdep_id'
+ - 'tbana_tbreg_id'
+ - 'tbana_tbzo_id'
+ - 'tbana_tbpv_id'
+ - 'tbana_tbtit_id'
+ - 'tbana_tytpsoc_id'
+ - 'tbana_tynaz_id'
+ - 'tbana_dt_nasc'
+ - 'tbana_tylin_id'
+ - 'tbana_tbrfg_id'
+ - 'tbana_stato'
+ - 'tbana_coord_lon'
+ - 'tbana_coord_lat'
+ - 'tbana_dtvar'
+ - 'tbana_tynaz_id_nasc'
+ - 'tbana_tyute_id'
+ - 'tbana_tyazi_id'
+ - 'tbana_id_pk'
+ - 'tbana_cciaa'
+ - 'tbana_rifanaes'
+ - 'tbana_cdtrav'
+ - 'tbana_contatto'
+ - 'tbana_contatto2'
+ - 'tbana_contatto3'
+ - 'tbana_contatto4'
+ - 'tbana_contatto5'
+ - 'tbana_perfisica'
+ - 'tbana_cell'
+ - 'tbana_comune_istat'
+ - 'tbana_prov_istat'
+ - 'tbana_regione_istat'
+ - 'tbana_area'
+ - 'tbana_pec'
+ - 'tbana_interno'
+ - 'tbana_cognome'
+ - 'tbana_nome'
+ - 'tbana_codident_perc'
+ - 'tbana_tpas770_perc'
+ - 'tbana_caupag_perc'
+ - 'tbana_citta_catast'
+ - 'tbana_citta_catast_dom'
+ - 'tbana_provincia_dom'
+ - 'tbana_citta_dom'
+ - 'tbana_cap_dom'
+ - 'tbana_indirizzo1_dom'
+ - 'tbana_citta_catast_nasc'
+ - 'tbana_provincia_nasc'
+ - 'tbana_citta_nasc'
+ - 'tbana_cdidiva'
+ - 'tbana_sesso'
+ - 'tbana_percip'
+ - 'tbana_indirizzo_dom'
+ - 'tbana_area_cli'
+ - 'tbana_ragsoc1'
+ - 'tbana_ragsoc2'
+ - 'tbana_indirizzo1'
+ - 'tbana_indirizzo2'
+ - 'tbana_citta'
+ - 'tbana_provincia'
+ - 'tbana_cap'
+ - 'tbana_codfisc'
+ - 'tbana_piva'
+ - 'tbana_telefono1'
+ - 'tbana_telefono2'
+ - 'tbana_fax'
+ - 'tbana_internet'
+ - 'tbana_email'
+ - 'tbana_telcoll'
+ - 'tbana_ricerca'
+ - 'tbana_luogonasc'
+
+Copia e incolla questo nel tuo Model:
+protected $allowedFields = [
+    'tbana_tbdep_id',
+    'tbana_tbreg_id',
+    'tbana_tbzo_id',
+    'tbana_tbpv_id',
+    'tbana_tbtit_id',
+    'tbana_tytpsoc_id',
+    'tbana_tynaz_id',
+    'tbana_dt_nasc',
+    'tbana_tylin_id',
+    'tbana_tbrfg_id',
+    'tbana_stato',
+    'tbana_coord_lon',
+    'tbana_coord_lat',
+    'tbana_dtvar',
+    'tbana_tynaz_id_nasc',
+    'tbana_tyute_id',
+    'tbana_tyazi_id',
+    'tbana_cciaa',
+    'tbana_rifanaes',
+    'tbana_cdtrav',
+    'tbana_contatto',
+    'tbana_contatto2',
+    'tbana_contatto3',
+    'tbana_contatto4',
+    'tbana_contatto5',
+    'tbana_perfisica',
+    'tbana_cell',
+    'tbana_comune_istat',
+    'tbana_prov_istat',
+    'tbana_regione_istat',
+    'tbana_area',
+    'tbana_pec',
+    'tbana_interno',
+    'tbana_cognome',
+    'tbana_nome',
+    'tbana_codident_perc',
+    'tbana_tpas770_perc',
+    'tbana_caupag_perc',
+    'tbana_citta_catast',
+    'tbana_citta_catast_dom',
+    'tbana_provincia_dom',
+    'tbana_citta_dom',
+    'tbana_cap_dom',
+    'tbana_indirizzo1_dom',
+    'tbana_citta_catast_nasc',
+    'tbana_provincia_nasc',
+    'tbana_citta_nasc',
+    'tbana_cdidiva',
+    'tbana_sesso',
+    'tbana_percip',
+    'tbana_indirizzo_dom',
+    'tbana_area_cli',
+    'tbana_ragsoc1',
+    'tbana_ragsoc2',
+    'tbana_indirizzo1',
+    'tbana_indirizzo2',
+    'tbana_citta',
+    'tbana_provincia',
+    'tbana_cap',
+    'tbana_codfisc',
+    'tbana_piva',
+    'tbana_telefono1',
+    'tbana_telefono2',
+    'tbana_fax',
+    'tbana_internet',
+    'tbana_email',
+    'tbana_telcoll',
+    'tbana_ricerca',
+    'tbana_luogonasc',
+];
+
