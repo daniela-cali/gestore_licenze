@@ -5,15 +5,17 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+$routes->get('/', 'HomeController::index');
 
 
 $routes->group('db', function($routes) {
-    $routes->get('/', 'DatabaseInfo::index');
-    $routes->get('info', 'DatabaseInfo::info'); 
+    $routes->get('/', 'DatabaseInfoController::index');
+    $routes->get('info', 'DatabaseInfoController::info'); 
 });
 
-$routes->group('licenze', function($routes) {
-    $routes->get('/', 'Clienti::index');
 
-});
+
+$routes->group('clienti', function($routes) {
+    $routes->get('/', 'ClientiController::index');
+    $routes->get('licenze', 'ClientiController::licenze');
+ });

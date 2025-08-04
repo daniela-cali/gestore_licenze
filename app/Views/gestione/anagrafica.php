@@ -1,173 +1,105 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dettaglio Cliente - Gestore Licenze</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <!-- CSS Personalizzato -->
+    <link href="<?= base_url('assets/css/custom.css') ?>" rel="stylesheet" />
+</head>
+<body>
 <div class="container my-5">
     <div class="card shadow-sm">
         <div class="card-header bg-primary text-white">
-            <h5 class="mb-0"><i class="bi bi-person-badge"></i> Gestione Cliente</h5>
+            <h5 class="mb-0"><i class="bi bi-person-badge"></i> Dettaglio Cliente</h5>
         </div>
         <div class="card-body">
-            <!-- Nav Tabs -->
-            <ul class="nav nav-tabs" id="clienteTabs" role="tablist">
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" id="clienteTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="anagrafica-tab" data-bs-toggle="tab" data-bs-target="#anagrafica" type="button" role="tab">
-                        <i class="bi bi-person-vcard"></i> Anagrafica
+                    <button class="nav-link active" id="anagrafica-tab" data-bs-toggle="tab" data-bs-target="#anagrafica" type="button" role="tab" aria-controls="anagrafica" aria-selected="true">
+                        <i class="bi bi-file-person"></i> Anagrafica
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="licenze-tab" data-bs-toggle="tab" data-bs-target="#licenze" type="button" role="tab">
+                    <button class="nav-link" id="licenze-tab" data-bs-toggle="tab" data-bs-target="#licenze" type="button" role="tab" aria-controls="licenze" aria-selected="false">
                         <i class="bi bi-key"></i> Licenze
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="aggiornamenti-tab" data-bs-toggle="tab" data-bs-target="#aggiornamenti" type="button" role="tab">
-                        <i class="bi bi-arrow-repeat"></i> Aggiornamenti Licenze
+                    <button class="nav-link" id="aggiornamenti-tab" data-bs-toggle="tab" data-bs-target="#aggiornamenti" type="button" role="tab" aria-controls="aggiornamenti" aria-selected="false">
+                        <i class="bi bi-clock-history"></i> Aggiornamenti
                     </button>
                 </li>
             </ul>
 
-            <div class="tab-content pt-4" id="clienteTabsContent">
+            <!-- Tab panes -->
+            <div class="tab-content mt-3" id="clienteTabContent">
+                <div class="tab-pane fade show active" id="anagrafica" role="tabpanel" aria-labelledby="anagrafica-tab">
+                    <dl class="row">
+                        <dt class="col-sm-3">Codice Cliente</dt>
+                        <dd class="col-sm-9"><?= esc($cliente->codice_cliente) ?></dd>
 
-                <!-- ANAGRAFICA -->
-                <div class="tab-pane fade show active" id="anagrafica" role="tabpanel">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Nome</label>
-                            <div class="form-control bg-light"><?= esc($cliente->nome) ?></div>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Cognome</label>
-                            <div class="form-control bg-light"><?= esc($cliente->cognome) ?></div>
-                        </div>
-                        <!-- Altri campi... -->
-                    </div>
+                        <dt class="col-sm-3">Nome</dt>
+                        <dd class="col-sm-9"><?= esc($cliente->nome) ?></dd>
+
+                        <dt class="col-sm-3">Email</dt>
+                        <dd class="col-sm-9"><?= esc($cliente->email) ?></dd>
+
+                        <dt class="col-sm-3">Telefono</dt>
+                        <dd class="col-sm-9"><?= esc($cliente->telefono) ?></dd>
+
+                        <dt class="col-sm-3">Città</dt>
+                        <dd class="col-sm-9"><?= esc($cliente->citta) ?></dd>
+
+                        <dt class="col-sm-3">Indirizzo</dt>
+                        <dd class="col-sm-9"><?= esc($cliente->indirizzo) ?></dd>
+                    </dl>
                 </div>
 
-                <!-- LICENZE (MODIFICA + INSERISCI) -->
-                <div class="tab-pane fade" id="licenze" role="tabpanel">
-                    <!-- Form Aggiunta Licenza -->
-                    <form action="/licenze/crea" method="post" class="mb-4">
-                        <input type="hidden" name="cliente_id" value="<?= esc($cliente->id) ?>">
-                        <div class="row g-3 align-items-end">
-                            <div class="col-md-3">
-                                <label class="form-label">Codice</label>
-                                <input type="text" name="codice" class="form-control" required>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label">Prodotto</label>
-                                <input type="text" name="prodotto" class="form-control" required>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label">Attivazione</label>
-                                <input type="date" name="attivazione" class="form-control">
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label">Scadenza</label>
-                                <input type="date" name="scadenza" class="form-control">
-                            </div>
-                            <div class="col-md-2 mt-2">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="attiva" value="1" id="attiva">
-                                    <label class="form-check-label" for="attiva">Attiva</label>
-                                </div>
-                            </div>
-                            <div class="col-md-2 mt-2">
-                                <button type="submit" class="btn btn-success">
-                                    <i class="bi bi-plus-circle"></i> Aggiungi
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- Tabella Licenze Esistenti -->
+                <div class="tab-pane fade" id="licenze" role="tabpanel" aria-labelledby="licenze-tab">
                     <?php if (!empty($licenze)): ?>
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Codice</th>
-                                    <th>Prodotto</th>
-                                    <th>Attivazione</th>
-                                    <th>Scadenza</th>
-                                    <th>Stato</th>
-                                    <th>Azioni</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($licenze as $lic): ?>
-                                    <tr>
-                                        <td><?= esc($lic->codice) ?></td>
-                                        <td><?= esc($lic->prodotto) ?></td>
-                                        <td><?= esc($lic->attivazione) ?></td>
-                                        <td><?= esc($lic->scadenza) ?></td>
-                                        <td>
-                                            <?= $lic->attiva ? '<span class="badge bg-success">Attiva</span>' : '<span class="badge bg-secondary">Scaduta</span>' ?>
-                                        </td>
-                                        <td>
-                                            <a href="/licenze/modifica/<?= $lic->id ?>" class="btn btn-sm btn-outline-primary">
-                                                <i class="bi bi-pencil"></i>
-                                            </a>
-                                            <a href="/licenze/elimina/<?= $lic->id ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Sei sicuro?')">
-                                                <i class="bi bi-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    <?php else: ?>
-                        <div class="alert alert-warning">Nessuna licenza registrata.</div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- AGGIORNAMENTI LICENZE (MODIFICA + INSERISCI) -->
-                <div class="tab-pane fade" id="aggiornamenti" role="tabpanel">
-                    <!-- Form Aggiunta Aggiornamento -->
-                    <form action="/aggiornamenti/crea" method="post" class="mb-4">
-                        <input type="hidden" name="cliente_id" value="<?= esc($cliente->id) ?>">
-                        <div class="row g-3 align-items-end">
-                            <div class="col-md-4">
-                                <label class="form-label">Prodotto</label>
-                                <input type="text" name="prodotto" class="form-control" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label">Descrizione</label>
-                                <input type="text" name="descrizione" class="form-control">
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label">Data</label>
-                                <input type="date" name="data" class="form-control">
-                            </div>
-                            <div class="col-md-1">
-                                <button type="submit" class="btn btn-success">
-                                    <i class="bi bi-plus-circle"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- Lista Aggiornamenti -->
-                    <?php if (!empty($aggiornamenti)): ?>
                         <ul class="list-group">
-                            <?php foreach ($aggiornamenti as $upd): ?>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    <div>
-                                        <strong><?= esc($upd->prodotto) ?></strong><br>
-                                        <small class="text-muted"><?= esc($upd->descrizione) ?></small>
-                                    </div>
-                                    <div class="text-end">
-                                        <span class="badge bg-primary"><?= esc($upd->data) ?></span><br>
-                                        <a href="/aggiornamenti/modifica/<?= $upd->id ?>" class="btn btn-sm btn-outline-primary mt-1">
-                                            <i class="bi bi-pencil"></i>
-                                        </a>
-                                        <a href="/aggiornamenti/elimina/<?= $upd->id ?>" class="btn btn-sm btn-outline-danger mt-1" onclick="return confirm('Eliminare aggiornamento?')">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </div>
+                            <?php foreach ($licenze as $licenza): ?>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <?= esc($licenza->nome_licenza) ?>
+                                    <span class="badge bg-primary rounded-pill"><?= esc($licenza->quantita) ?></span>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
                     <?php else: ?>
-                        <div class="alert alert-info">Nessun aggiornamento disponibile.</div>
+                        <div class="alert alert-warning">
+                            <i class="bi bi-exclamation-triangle"></i> Nessuna licenza associata a questo cliente.
+                        </div>
+                    <?php endif; ?>
+                </div>
+
+                <div class="tab-pane fade" id="aggiornamenti" role="tabpanel" aria-labelledby="aggiornamenti-tab">
+                    <?php if (!empty($aggiornamenti)): ?>
+                        <ul class="list-group">
+                            <?php foreach ($aggiornamenti as $agg): ?>
+                                <li class="list-group-item">
+                                    <strong><?= esc($agg->data) ?></strong> - <?= esc($agg->descrizione) ?>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php else: ?>
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle"></i> Nessun aggiornamento disponibile.
+                        </div>
                     <?php endif; ?>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
