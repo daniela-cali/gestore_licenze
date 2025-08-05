@@ -21,16 +21,16 @@ class ClientiController extends BaseController
         $data['clienti'] = $this->ClientiModel->getClienti();
         $data['title'] = 'Elenco Clienti';
 
-        return view('gestione/elenco_clienti', $data);
+        return view('clienti/index', $data);
     }
 
-    public function licenze()
+    public function schedaCliente($id)
     {
 
-        $data['clienti'] = $this->ClientiModel->getClienti();
-        $data['title'] = 'Elenco Clienti';
+        $data['clienti'] = $this->ClientiModel->getClientiById($id);
+        $data['title'] = 'Scheda Cliente';
 
-        return view('gestione/elenco_clienti_bss', $data);
+        return view('clienti/scheda_cliente', $data);
     }
 }
 

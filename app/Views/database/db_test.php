@@ -192,7 +192,7 @@
                     <!-- Success Action Buttons -->
                     <div class="row justify-content-center mt-4">
                         <div class="col-auto">
-                            <a href="/db/info" class="btn btn-custom me-3">
+                            <a href="/database/info" class="btn btn-custom me-3">
                                 <i class="bi bi-info-circle"></i> Informazioni Dettagliate
                             </a>
                             <a href="/" class="btn btn-outline-secondary">

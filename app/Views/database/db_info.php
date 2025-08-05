@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informazioni Database - Gestore Licenze</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
-    <!-- CSS Personalizzato -->
-    <link href="<?= base_url('assets/css/custom.css') ?>" rel="stylesheet">
-</head>
-<body>
+<?php $this->extend('layouts/main'); ?>
+<?php $this->section('content'); ?>
+
     <div class="container">
         <div class="main-container">
             <!-- Header -->
@@ -193,7 +182,7 @@
                 
                 <!-- Back Button -->
                 <div class="mt-4">
-                    <a href="/db/" class="btn btn-custom">
+                    <a href="/database" class="btn btn-custom">
                         <i class="bi bi-arrow-left"></i> Torna al Test Database
                     </a>
                 </div>
@@ -201,7 +190,4 @@
         </div>
     </div>
     
-    <!-- Bootstrap 5 JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<?php $this->endSection(); ?>

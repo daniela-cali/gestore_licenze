@@ -3,11 +3,14 @@
 
 /* Background generale */
 body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /*background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);*/
+    background: #f2f2f2;
     min-height: 100vh;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
+.bg-person {
+    background: #ca8427;
+}
 /* Container principale con glassmorphism */
 .main-container {
     background: rgba(255, 255, 255, 0.95);
@@ -21,7 +24,7 @@ body {
 
 /* Header con gradiente */
 .header-section {
-    background: linear-gradient(135deg, #2c3e50, #3498db);
+    background: linear-gradient(135deg, #ca8427, #e1b530);
     color: white;
     padding: 2rem;
 }
@@ -41,7 +44,7 @@ body {
 
 /* Card Headers personalizzati */
 .card-header {
-    background: linear-gradient(135deg, #9f6518, #e1b530);
+    background: linear-gradient(135deg, #ca8427, #e1b530);
     color: white;
     border: none;
     font-weight: 600;
@@ -108,7 +111,7 @@ body {
 
 /* Bottone personalizzato */
 .btn-custom {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #ca8427, #e1b530);
     border: none;
     border-radius: 25px;
     padding: 0.75rem 1.5rem;

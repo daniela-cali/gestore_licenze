@@ -8,7 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'HomeController::index');
 
 
-$routes->group('db', function($routes) {
+$routes->group('database', function($routes) {
     $routes->get('/', 'DatabaseInfoController::index');
     $routes->get('info', 'DatabaseInfoController::info'); 
 });
@@ -17,5 +17,17 @@ $routes->group('db', function($routes) {
 
 $routes->group('clienti', function($routes) {
     $routes->get('/', 'ClientiController::index');
-    $routes->get('licenze', 'ClientiController::licenze');
+    $routes->get('scheda_cliente/(:num)', 'ClientiController::schedaCliente/$1');
+ });
+
+$routes->group('licenze', function($routes) {
+    $routes->get('/', 'LicenzeController::index');
+    $routes->get('crea/(:num)', 'LicenzeController::crea');
+    $routes->get('salva/(:num)', 'LicenzeController::creaByIdCliente/$1'); // Nuova licenza per IDCliente
+    $routes->post('salva', 'LicenzeController::salva'); 
+    $routes->get('modifica/(:num)', 'LicenzeController::modifica/$1');
+    $routes->post('modifica/(:num)', 'LicenzeController::modifica/$1');
+    $routes->get('elimina/(:num)', 'LicenzeController::elimina/$1');
+    $routes->get('visualizza/(:num)', 'LicenzeController::visualizza/$1');
+    
  });

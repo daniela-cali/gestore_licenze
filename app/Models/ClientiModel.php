@@ -29,5 +29,23 @@ public function getClienti()
         ->findAll();
 }
 
+public function getClientiById($id)
+{
+    return $this->select([
+            'tbcf_cd as codice_cliente',
+            'tbana_id_pk as id',
+            'tbana_ragsoc1 as nome',
+            'tbana_indirizzo1 as indirizzo',
+            'tbana_citta as citta',
+            'tbana_cap as cap',
+            'tbana_provincia as provincia',
+            'tbana_telefono1 as telefono',  
+            'tbana_email as email'
+        ])
+        ->orderBy('tbana_ragsoc1', 'ASC')
+        ->where('tbcf_tp', 'C')
+        ->where('tbana_id_pk', $id)
+        ->findAll();
+}
 
 }

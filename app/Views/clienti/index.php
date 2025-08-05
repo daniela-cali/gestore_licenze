@@ -4,9 +4,7 @@
     <div class="card shadow-sm">
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
             <h5 class="mb-0"><i class="bi bi-people"></i> Elenco Clienti</h5>
-            <a href="/clienti/crea" class="btn btn-light btn-sm">
-                <i class="bi bi-plus-circle"></i> Aggiungi Cliente
-            </a>
+
         </div>
         <div class="card-body">
 
@@ -42,15 +40,13 @@
                                         <?//php endif; ?>
                                     </td>-->
                                     <td>
-                                        <a href="/clienti/visualizza/<?= $cliente->id ?>" class="btn btn-sm btn-outline-primary" title="Licenze">
-                                            <i class="bi bi-eye"></i>
+                                        <a href="/clienti/scheda_cliente/<?= $cliente->id ?>" class="btn btn-sm btn-outline-primary" title="Scheda Cliente">
+                                            <i class="bi bi-person-vcard"></i> 
                                         </a>
-                                        <a href="/clienti/modifica/<?= $cliente->id ?>" class="btn btn-sm btn-outline-secondary" title="Modifica">
-                                            <i class="bi bi-pencil"></i>
+                                        <a href="/licenze/salva/<?= $cliente->id ?>" class="btn btn-sm btn-outline-primary" title="Crea Licenza per il cliente">
+                                            <i class="bi bi-key-fill"></i> 
                                         </a>
-                                        <a href="/clienti/elimina/<?= $cliente->id ?>" class="btn btn-sm btn-outline-danger" title="Elimina" onclick="return confirm('Eliminare il cliente?')">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
+
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

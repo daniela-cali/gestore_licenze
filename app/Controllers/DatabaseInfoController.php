@@ -78,7 +78,7 @@ class DatabaseInfoController extends BaseController
                 'schema' => $schema,
                 'tables' => $tables,
                 'columns_ana' => $columns_tbana,
-                'columns_lic' => $columns_tblic, // Uncomment if needed
+                'columns_lic' => $columns_tblic, 
             ];
             
             return view('database/db_info', $data);
