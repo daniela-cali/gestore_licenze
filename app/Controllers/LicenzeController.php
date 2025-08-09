@@ -97,4 +97,11 @@ class LicenzeController extends BaseController
 
         return view('licenze/visualizza', $data);
     }
+    public function jsonByLicenza($idLicenza)
+{
+    $aggModel = new \App\Models\AggiornamentiModel();
+    $aggiornamenti = $aggModel->getByLicenza($idLicenza);
+
+    return $this->response->setJSON($aggiornamenti);
+}
 }

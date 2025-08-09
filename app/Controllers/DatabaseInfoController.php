@@ -30,6 +30,36 @@ class DatabaseInfoController extends BaseController
         }
     }
 
+    public function getTableFields($tableName)
+    {
+        try {
+            log_message('info', 'Richiesta campi per la tabella: ' . $tableName);
+            $db = \Config\Database::connect();
+            $schema = env('database.default.schema', 'public');
+            
+            $query = $db->query("
+                SELECT column_name, data_type, is_nullable, column_default
+                FROM information_schema.columns 
+                WHERE table_name = ? AND table_schema = ?
+                ORDER BY ordinal_position
+            ", [$tableName, $schema]);
+            $result = $query->getResultArray();
+            log_message('info', 'Ho eseguito la query per ottenere i campi della tabella: ' . $tableName);
+            //log_message('info', 'Risultato: ' . print_r($result, true));
+            $allowedFields = [];
+            foreach ($result as $key => $value) {
+                $allowedFields[] = $value['column_name'];
+            }
+
+            log_message('info', 'Campi consentiti: ' . print_r($allowedFields, true));
+            return view('database/db_fields', ['fields' => $result, 'table_name' => $tableName, 'allowed_fields' => $allowedFields]);
+            
+        } catch (\Exception $e) {
+            log_message('error', 'Errore nel recupero campi: ' . $e->getMessage());
+            return view('database/db_fields', ['error' => $e->getMessage()]);
+        }
+    }
+
     public function info()
     {
         try {

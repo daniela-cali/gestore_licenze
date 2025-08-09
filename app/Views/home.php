@@ -4,7 +4,7 @@
 <div class="container my-5">
     <div class="card shadow-sm">
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-            <h5 class="mb-0"><i class="bi bi-house-door"></i> Home - Gestione Licenze</h5>
+            <h5 class="mb-0"><i class="bi bi-house-door"></i> Home - MeTe Licenze</h5>
         </div>
         <div class="card-body">
             <p class="lead">Benvenuto nel sistema di gestione licenze.</p>
@@ -43,7 +43,7 @@
                             <h6>Test Database</h6>
                             <p class="text-muted small">Verifica connessione e struttura del database.</p>
                             <a href="<?= base_url('/database/info') ?>" class="btn btn-outline-warning btn-sm">
-                                Esegui Test
+                                Visualizza Tools Database
                             </a>
                         </div>
                     </div>

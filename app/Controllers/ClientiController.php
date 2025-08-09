@@ -33,9 +33,7 @@ class ClientiController extends BaseController
 
         $data['cliente'] = $this->ClientiModel->getClientiById($id);
         $data['licenze'] = $this->LicenzeModel->getLicenzeByCliente($id);
-        log_message('info', 'Ricevuto ID Cliente: ' . $id);
-        log_message('info', 'Dati Cliente: ' . json_encode($data['cliente']));
-        log_message('info', 'Dati Licenze: ' . json_encode($data['licenze']));
+
         $data['title'] = 'Scheda Cliente';
 
         return view('clienti/scheda_cliente', $data);

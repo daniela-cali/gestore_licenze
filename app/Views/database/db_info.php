@@ -8,7 +8,7 @@
                 <h1 class="display-4 mb-2">
                     <i class="bi bi-database"></i> Database Information
                 </h1>
-                <p class="lead mb-0">Gestore Licenze - Sistema di Monitoraggio Database</p>
+                <p class="lead mb-0">MeTe Licenze - Sistema di Monitoraggio Database</p>
             </div>
             
             <!-- Content -->
@@ -99,7 +99,11 @@
                                         <?php foreach($tables as $table): ?>
                                             <div class="d-flex justify-content-between align-items-center mb-2">
                                                 <span><i class="bi bi-table me-2"></i><?= esc($table->tablename) ?></span>
-                                                <span class="table-name"><?= esc($schema) ?>.<?= esc($table->tablename) ?></span>
+                                                <a href="<?= site_url('/database/fields/'.$table->tablename) ?>"> 
+                                                    <span class="table-name">
+                                                        <?= esc($schema) ?>.<?= esc($table->tablename) ?>
+                                                    </span>
+                                                </a>
                                             </div>
                                         <?php endforeach; ?>
                                     </div>

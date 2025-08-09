@@ -37,7 +37,7 @@ class LicenzeModel extends Model
             ->orderBy('tblic_cd', 'ASC')
             ->findAll();
     }
-    
+
     public function getLicenzeByCliente($id)
     {
         return $this->where('tblic_tbana_id', $id)->findAll();

@@ -20,7 +20,10 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-person shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="<?= base_url('/') ?>"><i class="bi bi-box-seam"></i> Gestione Licenze</a>
+            <a class="navbar-brand" href="<?= base_url('/') ?>">
+                <img src="<?= base_url('assets/icons/logo.png') ?>" alt="Logo" height="50"> MeTe Licenze
+            </a>
+            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -47,7 +50,10 @@
     </main>
 
     <!-- Bootstrap Bundle -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.bootstrap5.js"></script>
     <?= $this->renderSection('scripts') ?>
 </body>
 </html>
