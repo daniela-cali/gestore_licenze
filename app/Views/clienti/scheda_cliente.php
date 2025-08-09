@@ -111,7 +111,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td colspan="2" class="text-center">Seleziona una licenza per vedere gli aggiornamenti</td>
+                                <td colspan="2" class="text-center">HTML Seleziona una licenza per vedere gli aggiornamenti</td>
                             </tr>
                         </tbody>
                     </table>
@@ -126,84 +126,78 @@
 
 <?php $this->section('scripts'); ?>
 <script>
-    $(document).ready(function() {
-        // Gestione del click sui tab
-        $('.nav-link').on('click', function() {
-            tabActive = $(this).attr('id'); // Aggiorna la variabile con il tab attivo
-
-            switch (tabActive) {
-                case 'anagrafica-tab':
-                    console.log('Tab Anagrafica selezionato');
-                    $('#navigation').attr('href', '/clienti');
-                    $('#navigation').html('<i class="bi bi-arrow-left-circle"></i> Torna all’elenco clienti');
-
-                    break;
-                case 'licenze-tab':
-                    console.log('Tab Licenze selezionato');
-                    $('#navigation').attr('href', '/licenze/crea/' + <?= esc($cliente->id) ?>);
-                    $('#navigation').html('<i class="bi bi-key-fill"></i> Crea Licenza per il cliente');
-
-                    break;
-                case 'aggiornamenti-tab':
-                    console.log('Tab Aggiornamenti selezionato');
-                    $('#navigation').attr('href', '/aggiornamenti/crea/' + <?= esc($cliente->id) ?>);
-                    $('#navigation').html('<i class="bi bi-clock-history"></i> Aggiungi Aggiornamento per la licenza');
-                    /*$('#navigation').attr('href', '/licenze/aggiornamenti/');
-                    $('#navigation').text('Crea Aggiornamento per la licenza');*/
-                    break;
-                default:
-                    console.log('Tab sconosciuto selezionato');
-            }
-
-
-        });
-    });
+    // Event listener per il click sui tab
     document.addEventListener("DOMContentLoaded", function() {
+        const licenzeRows = document.querySelectorAll('.licenza-row');
+        //console.log('Licenze Rows:', licenzeRows);
+        const tabs = document.querySelectorAll('[data-bs-toggle="tab"]');
+        //console.log('Tabs:', tabs);
         let selectedLicenzaId = null;
-        const rows = document.querySelectorAll('.licenza-row');
-        const tabAggiornamentiTrigger = document.getElementById('aggiornamenti-tab');
-        const tabAggContentBody = document.querySelector('#tabella-aggiornamenti tbody');
-
         // Selezione licenza
-        rows.forEach(row => {
+        licenzeRows.forEach(row => {
             row.addEventListener('click', function() {
-                rows.forEach(r => r.classList.remove('table-primary'));
-                this.classList.add('table-primary');
+                licenzeRows.forEach(r => r.classList.remove('table-primary', 'selected')); // Rimuovo classe da tutte le righe
+                this.classList.add('table-primary', 'selected'); // Aggiungo classe selected alla riga selezionata per renderla univoca
                 selectedLicenzaId = this.getAttribute('data-id');
+                //console.log('Licenza selezionata ID:', selectedLicenzaId);
             });
         });
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                let tabActive = this.id;
+                //console.log('Tab attivo:', tabActive);
+                switch (tabActive) {
+                    case 'anagrafica-tab':
+                        //console.log('Tab Anagrafica selezionato');
+                        document.getElementById('navigation').setAttribute('href', '/clienti');
+                        document.getElementById('navigation').innerHTML = '<i class="bi bi-arrow-left-circle"></i> Torna all’elenco clienti';
+                        break;
+                    case 'licenze-tab':
+                        console.log('Tab Licenze selezionato');
+                        document.getElementById('navigation').setAttribute('href', '/licenze/nuova/<?= esc($cliente->id) ?>');
+                        document.getElementById('navigation').innerHTML = '<i class="bi bi-key-fill"></i> Crea Licenza per il cliente';
+                        break;
+                    case 'aggiornamenti-tab':
+                        console.log('Tab Aggiornamenti selezionato');
+                        document.getElementById('navigation').setAttribute('href', '/aggiornamenti/crea/' + selectedLicenzaId);
+                        document.getElementById('navigation').innerHTML = '<i class="bi bi-clock-history"></i> Aggiungi Aggiornamento per la licenza';
+                        let tabAggContentBody = document.querySelector('#tabella-aggiornamenti tbody');
+                        tabAggContentBody.innerHTML = ''; // Pulisce il contenuto della tabella
+                        if (!selectedLicenzaId) {
+                            document.querySelector('#tabella-aggiornamenti tbody').innerHTML = '<tr><td colspan="2" class="text-center">Seleziona una licenza per vederne gli aggiornamenti.</td></tr>';
+                            return;
+                        } else {
+                            fetch(`/api/aggiornamenti/licenza/${selectedLicenzaId}`)
+                                .then(res => res.json())
+                                .then(data => {
+                                    tabAggContentBody.innerHTML = '';
 
-        // Caricamento aggiornamenti
-        tabAggiornamentiTrigger.addEventListener('shown.bs.tab', function() {
-            if (!selectedLicenzaId) {
-                tabAggContentBody.innerHTML = '<tr><td colspan="2" class="text-center">Seleziona una licenza prima di vedere gli aggiornamenti.</td></tr>';
-                return;
-            }
+                                    if (data.length === 0) {
+                                        tabAggContentBody.innerHTML = '<tr><td colspan="2" class="text-center">Nessun aggiornamento disponibile per questa licenza.</td></tr>';
+                                        return;
+                                    }
 
-            fetch(`/api/aggiornamenti/licenza/${selectedLicenzaId}`)
-                .then(res => res.json())
-                .then(data => {
-                    tabAggContentBody.innerHTML = '';
-
-                    if (data.length === 0) {
-                        tabAggContentBody.innerHTML = '<tr><td colspan="2" class="text-center">Nessun aggiornamento disponibile per questa licenza.</td></tr>';
-                        return;
-                    }
-
-                    data.forEach(agg => {
-                        tabAggContentBody.innerHTML += `
-                            <tr>
-                                <td>${agg.data}</td>
-                                <td>${agg.descrizione}</td>
-                            </tr>
-                        `;
-                    });
-                })
-                .catch(err => {
-                    tabAggContentBody.innerHTML = '<tr><td colspan="2" class="text-danger text-center">Errore nel caricamento aggiornamenti.</td></tr>';
-                    console.error(err);
-                });
+                                    data.forEach(agg => {
+                                        tabAggContentBody.innerHTML += `
+                                            <tr>
+                                                <td>${agg.data}</td>
+                                                <td>${agg.descrizione}</td>
+                                            </tr>
+                                    `;
+                                    });
+                                })
+                                .catch(err => {
+                                    tabAggContentBody.innerHTML = '<tr><td colspan="2" class="text-danger text-center">Errore nel caricamento aggiornamenti.</td></tr>';
+                                    console.error(err);
+                                });
+                        }
+                        break;
+                    default:
+                        console.log('Tab sconosciuto selezionato');
+                }
+            });
         });
     });
+
 </script>
 <?php $this->endSection(); ?>

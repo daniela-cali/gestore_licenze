@@ -23,7 +23,7 @@ $routes->group('clienti', function($routes) {
 
 $routes->group('licenze', function($routes) {
     $routes->get('/', 'LicenzeController::index');
-    $routes->get('crea/(:num)', 'LicenzeController::crea');
+    $routes->get('crea', 'LicenzeController::crea');
     $routes->get('nuova/(:num)', 'LicenzeController::crea/$1'); // Nuova licenza per IDCliente
     $routes->post('salva', 'LicenzeController::salva'); 
     $routes->get('modifica/(:num)', 'LicenzeController::modifica/$1');
