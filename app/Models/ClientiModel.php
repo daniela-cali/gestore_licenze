@@ -45,7 +45,7 @@ public function getClientiById($id)
         ->orderBy('tbana_ragsoc1', 'ASC')
         ->where('tbcf_tp', 'C')
         ->where('tbana_id_pk', $id)
-        ->findAll();
+        ->first();
 }
 
 }

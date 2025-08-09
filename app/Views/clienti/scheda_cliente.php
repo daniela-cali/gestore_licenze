@@ -1,12 +1,17 @@
 <?php $this->extend('layouts/main'); ?>
-<?php $this->section('content'); ?>
-<div class="container my-5">
-    <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white">
-            <h5 class="mb-0"><i class="bi bi-person-badge"></i> Dettaglio Cliente</h5>
-        </div>
-        <div class="card-body">
 
+<?php $this->section('content'); ?>
+
+<div class="container mt-4"> <!-- Limita la larghezza -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="bi bi-person-badge"></i> Dettaglio Cliente</h5>
+            <a href="/clienti" class="btn btn-outline-light btn-sm">
+                <i class="bi bi-arrow-left-circle"></i> Torna all’elenco clienti
+            </a>
+        </div>
+
+        <div class="card-body">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" id="clienteTab" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -28,6 +33,7 @@
 
             <!-- Tab panes -->
             <div class="tab-content mt-3" id="clienteTabContent">
+                <!-- ANAGRAFICA -->
                 <div class="tab-pane fade show active" id="anagrafica" role="tabpanel" aria-labelledby="anagrafica-tab">
                     <dl class="row">
                         <dt class="col-sm-3">Codice Cliente</dt>
@@ -50,16 +56,42 @@
                     </dl>
                 </div>
 
+                <!-- LICENZE -->
                 <div class="tab-pane fade" id="licenze" role="tabpanel" aria-labelledby="licenze-tab">
                     <?php if (!empty($licenze)): ?>
-                        <ul class="list-group">
-                            <?php foreach ($licenze as $licenza): ?>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <?= esc($licenza->nome_licenza) ?>
-                                    <span class="badge bg-primary rounded-pill"><?= esc($licenza->quantita) ?></span>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
+                        <table class="table table-bordered table-hover align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Codice</th>
+                                    <th>Descrizione</th>
+                                    <th>Tipo</th>
+                                    <th>Stato</th>
+                                    <th>Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($licenze as $licenza): ?>
+                                    <tr class="licenza-row" data-id="<?= esc($licenza->tblic_id_pk) ?>" style="cursor:pointer;">
+                                        <td><?= esc($licenza->tblic_cd) ?></td>
+                                        <td><?= esc($licenza->tblic_desc) ?></td>
+                                        <td><?= esc($licenza->tblic_tp) ?></td>
+                                        <td>
+                                            <span class="badge <?= $licenza->tblic_stato === 't' ? 'bg-success' : 'bg-secondary' ?>">
+                                                <?= $licenza->tblic_stato === 't' ? 'Attiva' : 'Inattiva' ?>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a href="/licenze/modifica/<?= $licenza->tblic_id_pk ?>" class="btn btn-sm btn-outline-secondary" title="Modifica">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <a href="/licenze/elimina/<?= $licenza->tblic_id_pk ?>" class="btn btn-sm btn-outline-danger" title="Elimina" onclick="return confirm('Sei sicuro di voler eliminare questa licenza?');">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                     <?php else: ?>
                         <div class="alert alert-warning">
                             <i class="bi bi-exclamation-triangle"></i> Nessuna licenza associata a questo cliente.
@@ -67,25 +99,78 @@
                     <?php endif; ?>
                 </div>
 
+                <!-- AGGIORNAMENTI -->
                 <div class="tab-pane fade" id="aggiornamenti" role="tabpanel" aria-labelledby="aggiornamenti-tab">
-                    <?php if (!empty($aggiornamenti)): ?>
-                        <ul class="list-group">
-                            <?php foreach ($aggiornamenti as $agg): ?>
-                                <li class="list-group-item">
-                                    <strong><?= esc($agg->data) ?></strong> - <?= esc($agg->descrizione) ?>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php else: ?>
-                        <div class="alert alert-info">
-                            <i class="bi bi-info-circle"></i> Nessun aggiornamento disponibile.
-                        </div>
-                    <?php endif; ?>
+                    <table class="table table-striped" id="tabella-aggiornamenti">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Descrizione</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2" class="text-center">Seleziona una licenza per vedere gli aggiornamenti</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </div>
+            </div> <!-- tab-content -->
+        </div> <!-- card-body -->
+    </div> <!-- card -->
+</div> <!-- container -->
 
-        </div>
-    </div>
-</div>
+<?php $this->endSection(); ?>
 
+
+<?php $this->section('scripts'); ?>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let selectedLicenzaId = null;
+        const rows = document.querySelectorAll('.licenza-row');
+        const tabAggiornamentiTrigger = document.getElementById('aggiornamenti-tab');
+        const tabAggContentBody = document.querySelector('#tabella-aggiornamenti tbody');
+
+        // Selezione licenza
+        rows.forEach(row => {
+            row.addEventListener('click', function() {
+                rows.forEach(r => r.classList.remove('table-primary'));
+                this.classList.add('table-primary');
+                selectedLicenzaId = this.getAttribute('data-id');
+            });
+        });
+
+        // Caricamento aggiornamenti
+        tabAggiornamentiTrigger.addEventListener('shown.bs.tab', function() {
+            if (!selectedLicenzaId) {
+                tabAggContentBody.innerHTML = '<tr><td colspan="2" class="text-center">Seleziona una licenza prima di vedere gli aggiornamenti.</td></tr>';
+                return;
+            }
+
+            fetch(`/api/aggiornamenti/licenza/${selectedLicenzaId}`)
+                .then(res => res.json())
+                .then(data => {
+                    tabAggContentBody.innerHTML = '';
+
+                    if (data.length === 0) {
+                        tabAggContentBody.innerHTML = '<tr><td colspan="2" class="text-center">Nessun aggiornamento disponibile per questa licenza.</td></tr>';
+                        return;
+                    }
+
+                    data.forEach(agg => {
+                        tabAggContentBody.innerHTML += `
+                            <tr>
+                                <td>${agg.data}</td>
+                                <td>${agg.descrizione}</td>
+                            </tr>
+                        `;
+                    });
+                })
+                .catch(err => {
+                    tabAggContentBody.innerHTML = '<tr><td colspan="2" class="text-danger text-center">Errore nel caricamento aggiornamenti.</td></tr>';
+                    console.error(err);
+                });
+        });
+    });
+</script>
 <?php $this->endSection(); ?>

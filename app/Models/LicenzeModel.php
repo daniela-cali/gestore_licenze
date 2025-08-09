@@ -37,9 +37,15 @@ class LicenzeModel extends Model
             ->orderBy('tblic_cd', 'ASC')
             ->findAll();
     }
+    
+    public function getLicenzeByCliente($id)
+    {
+        return $this->where('tblic_tbana_id', $id)->findAll();
+    }
+
     public function salva($data)
     {
-        log_message('info', 'Ricevo i seguenti dati: ' . json_encode($data));  
+        log_message('info', 'Ricevo i seguenti dati: ' . json_encode($data));
         $query = $this->query("SELECT nextval('nrg.s_tblic_id') AS next_id");
         $nextId = $query->getRow()->next_id;
         log_message('info', 'e aggiungo il prossimo ID per la licenza: ' . $nextId);
@@ -53,6 +59,6 @@ class LicenzeModel extends Model
         ], true);
 
         return $this->getInsertID(); // Restituisce l'ID della nuova licenza
-        
+
     }
 }

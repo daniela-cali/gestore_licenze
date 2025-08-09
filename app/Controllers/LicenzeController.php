@@ -23,7 +23,7 @@ class LicenzeController extends BaseController
         return view('licenze/index', $data);
     }
     
-    public function creaByIdCliente($idCliente = null)
+    /**public function creaByIdCliente($idCliente = null)
     {
         // Se $idCliente è fornito, puoi usarlo per precompilare il campo id_cliente nel form
         $data['id_cliente'] = $idCliente;
@@ -33,14 +33,20 @@ class LicenzeController extends BaseController
 
     
        return view('licenze/crea', $data);
-    }
+    }**/
 
-    public function crea()
+    public function crea($idCliente = null)
     {
-        // Passa i dati alla vista
-        $data['title'] = 'Crea Licenza SENZA IDCliente';
+        // Se $idCliente è fornito, puoi usarlo per precompilare il campo id_cliente nel form
+        $data['id_cliente'] = $idCliente;
 
-    
+        // Se non hai un ID cliente, puoi gestire la logica di creazione della licenza senza ID cliente
+        if ($idCliente === null) {
+            $data['title'] = 'Crea Licenza SENZA IDCliente';
+        } else {
+            $data['title'] = 'Crea Licenza per IDCliente ' . esc($idCliente);
+        }
+        
        return view('licenze/crea', $data);
     }
     public function salva($idCliente = null)

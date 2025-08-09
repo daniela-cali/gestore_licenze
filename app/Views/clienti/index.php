@@ -43,7 +43,7 @@
                                         <a href="/clienti/scheda_cliente/<?= $cliente->id ?>" class="btn btn-sm btn-outline-primary" title="Scheda Cliente">
                                             <i class="bi bi-person-vcard"></i> 
                                         </a>
-                                        <a href="/licenze/salva/<?= $cliente->id ?>" class="btn btn-sm btn-outline-primary" title="Crea Licenza per il cliente">
+                                        <a href="/licenze/nuova/<?= $cliente->id ?>" class="btn btn-sm btn-outline-primary" title="Crea Licenza per il cliente">
                                             <i class="bi bi-key-fill"></i> 
                                         </a>
 
