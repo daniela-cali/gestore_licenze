@@ -6,7 +6,7 @@
     <div class="card shadow-sm">
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
             <h5 class="mb-0"><i class="bi bi-person-badge"></i> Dettaglio Cliente</h5>
-                        
+
             <a href="/clienti" id="navigation" class="btn btn-outline-light btn-sm">
                 <i class="bi bi-arrow-left-circle"></i> Torna all’elenco clienti
             </a>
@@ -126,45 +126,38 @@
 
 <?php $this->section('scripts'); ?>
 <script>
+    $(document).ready(function() {
+        // Gestione del click sui tab
+        $('.nav-link').on('click', function() {
+            tabActive = $(this).attr('id'); // Aggiorna la variabile con il tab attivo
 
-            $(document).ready(function() {
-                // Gestione del click sui tab
-                $('.nav-link').on('click', function() {
-                    tabActive = $(this).attr('id'); // Aggiorna la variabile con il tab attivo
-                    textActive = $('#navigation').text().trim(); // Ottieni il testo del tab attivo
-                    iconActive = $('#navigation').find('i').attr('class'); // Ottieni la classe dell'icona del tab attivo
-                    hrefActive = $('#navigation').attr('href'); // Ottieni l'URL del tab attivo
-                    switch (tabActive) {
-                        case 'anagrafica-tab':
-                            console.log('Tab Anagrafica selezionato');
-                            $('#navigation').attr('href', '/clienti');
-                            $('#navigation').text('Torna all’elenco clienti');
-                            $('#navigation').find('i').removeClass().addClass('bi bi-arrow-left-circle');
-                            break;
-                        case 'licenze-tab':
-                            console.log('Tab Licenze selezionato');
-                            $('#navigation').attr('href', '/licenze/crea/' + <?= esc($cliente->id) ?>);
-                            $('#navigation').text('Crea Licenza per il cliente');
-                            $('#navigation').find('i').removeClass().addClass('bi bi-key-fill');
-                            break;
-                        case 'aggiornamenti-tab':
-                            console.log('Tab Aggiornamenti selezionato');
-                            $('#navigation').attr('href', '/licenze/aggiornamenti/');
-                            $('#navigation').text('Crea Aggiornamento per la licenza');
-                            break;
-                        default:
-                            console.log('Tab sconosciuto selezionato');
-                    }
-                    if (tabActive === 'licenze-tab') {
-                        console.log('Tab Aggiornamenti selezionato');
-                        $('#navigation').attr('href', '/licenze/crea/' + <?= esc($cliente->id) ?>);
-                    } else {
-                        $('#navigation').attr('href', '/licenze/aggiornamenti/');
-                    }
-                    console.log('Tab attivo:', tabActive + ', Testo:', textActive + ', Icona:', iconActive + ', URL:', hrefActive);
+            switch (tabActive) {
+                case 'anagrafica-tab':
+                    console.log('Tab Anagrafica selezionato');
+                    $('#navigation').attr('href', '/clienti');
+                    $('#navigation').html('<i class="bi bi-arrow-left-circle"></i> Torna all’elenco clienti');
 
-                });
-            });
+                    break;
+                case 'licenze-tab':
+                    console.log('Tab Licenze selezionato');
+                    $('#navigation').attr('href', '/licenze/crea/' + <?= esc($cliente->id) ?>);
+                    $('#navigation').html('<i class="bi bi-key-fill"></i> Crea Licenza per il cliente');
+
+                    break;
+                case 'aggiornamenti-tab':
+                    console.log('Tab Aggiornamenti selezionato');
+                    $('#navigation').attr('href', '/aggiornamenti/crea/' + <?= esc($cliente->id) ?>);
+                    $('#navigation').html('<i class="bi bi-clock-history"></i> Aggiungi Aggiornamento per la licenza');
+                    /*$('#navigation').attr('href', '/licenze/aggiornamenti/');
+                    $('#navigation').text('Crea Aggiornamento per la licenza');*/
+                    break;
+                default:
+                    console.log('Tab sconosciuto selezionato');
+            }
+
+
+        });
+    });
     document.addEventListener("DOMContentLoaded", function() {
         let selectedLicenzaId = null;
         const rows = document.querySelectorAll('.licenza-row');
