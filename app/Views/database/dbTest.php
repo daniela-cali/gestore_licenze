@@ -123,7 +123,7 @@
                                                 </div>
                                                 <div>
                                                     <h6 class="mb-1 text-muted">Database</h6>
-                                                    <span class="table-name fs-5"><?= esc($db_info->db_name) ?></span>
+                                                    <span class="table-name fs-5"><?= esc($dbInfo->db_name) ?></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -135,7 +135,7 @@
                                                 </div>
                                                 <div>
                                                     <h6 class="mb-1 text-muted">Encoding</h6>
-                                                    <span class="badge bg-success fs-6"><?= esc($db_info->encoding) ?></span>
+                                                    <span class="badge bg-success fs-6"><?= esc($dbInfo->encoding) ?></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -147,7 +147,7 @@
                                                 </div>
                                                 <div>
                                                     <h6 class="mb-1 text-muted">Collation</h6>
-                                                    <span class="table-name"><?= esc($db_info->collation) ?></span>
+                                                    <span class="table-name"><?= esc($dbInfo->collation) ?></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -159,7 +159,7 @@
                                                 </div>
                                                 <div>
                                                     <h6 class="mb-1 text-muted">CType</h6>
-                                                    <span class="table-name"><?= esc($db_info->ctype) ?></span>
+                                                    <span class="table-name"><?= esc($dbInfo->ctype) ?></span>
                                                 </div>
                                             </div>
                                         </div>

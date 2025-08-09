@@ -70,12 +70,15 @@ class LicenzeController extends BaseController
         // Logica per modificare una licenza
         // Puoi usare $this->request->getPost() per ottenere i dati dal form
         // E poi aggiornare i dati nel database usando il modello LicenzeModel
+        log_message('info', 'Modifica licenza con ID: ' . $id);
+        log_message('info', 'Dati ricevuti: ' . json_encode($this->request->getPost()));
         $data = [
             'tblic_cd' => $this->request->getPost('codice'),
             'tblic_desc' => $this->request->getPost('descrizione'),
             'tblic_tp' => $this->request->getPost('tipologia'),
         ];
-        $this->LicenzeModel->update($id, $data);
+        log_message('info', 'Dati da salvare: ' . json_encode($data));
+        //$this->LicenzeModel->update($id, $data);
         // Redirect o mostra un messaggio di successo
         return redirect()->to('/licenze');
     }

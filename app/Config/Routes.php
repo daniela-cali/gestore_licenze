@@ -18,7 +18,7 @@ $routes->group('database', function($routes) {
 
 $routes->group('clienti', function($routes) {
     $routes->get('/', 'ClientiController::index');
-    $routes->get('scheda_cliente/(:num)', 'ClientiController::schedaCliente/$1');
+    $routes->get('schedaCliente/(:num)', 'ClientiController::schedaCliente/$1');
  });
 
 $routes->group('licenze', function($routes) {

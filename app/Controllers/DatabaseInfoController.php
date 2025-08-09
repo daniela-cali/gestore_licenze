@@ -22,11 +22,11 @@ class DatabaseInfoController extends BaseController
             
             $result = $query->getRow();
             
-            return view('database/db_test', ['db_info' => $result]);
+            return view('database/dbTest', ['dbInfo' => $result]);
             
         } catch (\Exception $e) {
             // Passa l'errore alla view
-            return view('database/db_test', ['error' => $e->getMessage()]);
+            return view('database/dbTest', ['error' => $e->getMessage()]);
         }
     }
 
@@ -52,11 +52,11 @@ class DatabaseInfoController extends BaseController
             }
 
             log_message('info', 'Campi consentiti: ' . print_r($allowedFields, true));
-            return view('database/db_fields', ['fields' => $result, 'table_name' => $tableName, 'allowed_fields' => $allowedFields]);
+            return view('database/dbFields', ['fields' => $result, 'table_name' => $tableName, 'allowed_fields' => $allowedFields]);
             
         } catch (\Exception $e) {
             log_message('error', 'Errore nel recupero campi: ' . $e->getMessage());
-            return view('database/db_fields', ['error' => $e->getMessage()]);
+            return view('database/dbFields', ['error' => $e->getMessage()]);
         }
     }
 
@@ -67,7 +67,7 @@ class DatabaseInfoController extends BaseController
             $schema = env('database.default.schema', 'public');
             
             // Ottieni informazioni database
-            $db_info = $db->query("
+            $dbInfo = $db->query("
                 SELECT 
                     current_database() as db_name,
                     pg_encoding_to_char(encoding) as encoding,
@@ -104,17 +104,17 @@ class DatabaseInfoController extends BaseController
             ", [$schema])->getResult();
             
             $data = [
-                'db_info' => $db_info,
+                'dbInfo' => $dbInfo,
                 'schema' => $schema,
                 'tables' => $tables,
                 'columns_ana' => $columns_tbana,
                 'columns_lic' => $columns_tblic, 
             ];
             
-            return view('database/db_info', $data);
+            return view('database/dbInfo', $data);
             
         } catch (\Exception $e) {
-            return view('database/db_test', ['error' => $e->getMessage()]);
+            return view('database/dbTest', ['error' => $e->getMessage()]);
         }
     }
 }

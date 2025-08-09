@@ -36,7 +36,7 @@ class ClientiController extends BaseController
 
         $data['title'] = 'Scheda Cliente';
 
-        return view('clienti/scheda_cliente', $data);
+        return view('clienti/schedaCliente', $data);
     }
 }
 

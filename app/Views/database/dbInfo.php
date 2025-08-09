@@ -31,25 +31,25 @@
                                 <div class="row mb-2">
                                     <div class="col-5"><strong>Database:</strong></div>
                                     <div class="col-7">
-                                        <span class="table-name"><?= esc($db_info->db_name) ?></span>
+                                        <span class="table-name"><?= esc($dbInfo->db_name) ?></span>
                                     </div>
                                 </div>
                                 <div class="row mb-2">
                                     <div class="col-5"><strong>Encoding:</strong></div>
                                     <div class="col-7">
-                                        <span class="badge bg-primary"><?= esc($db_info->encoding) ?></span>
+                                        <span class="badge bg-primary"><?= esc($dbInfo->encoding) ?></span>
                                     </div>
                                 </div>
                                 <div class="row mb-2">
                                     <div class="col-5"><strong>Collation:</strong></div>
                                     <div class="col-7">
-                                        <span class="table-name"><?= esc($db_info->collation) ?></span>
+                                        <span class="table-name"><?= esc($dbInfo->collation) ?></span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-5"><strong>CType:</strong></div>
                                     <div class="col-7">
-                                        <span class="table-name"><?= esc($db_info->ctype) ?></span>
+                                        <span class="table-name"><?= esc($dbInfo->ctype) ?></span>
                                     </div>
                                 </div>
                             </div>

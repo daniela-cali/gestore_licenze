@@ -44,7 +44,7 @@
                                         ?>
                                     </td>-->
                                     <td>
-                                        <a href="/clienti/scheda_cliente/<?= $cliente->id ?>" class="btn btn-sm btn-outline-primary" title="Scheda Cliente">
+                                        <a href="/clienti/schedaCliente/<?= $cliente->id ?>" class="btn btn-sm btn-outline-primary" title="Scheda Cliente">
                                             <i class="bi bi-person-vcard"></i>
                                         </a>
                                         <a href="/licenze/nuova/<?= $cliente->id ?>" class="btn btn-sm btn-outline-primary" title="Crea Licenza per il cliente">
