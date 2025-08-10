@@ -38,27 +38,35 @@ class LicenzeModel extends Model
             ->findAll();
     }
 
-    public function getLicenzeByCliente($id)
+    public function getLicenzeByCliente($idCliente)
     {
-        return $this->where('tblic_tbana_id', $id)->findAll();
+        return $this->where('tblic_tbana_id', $idCliente)->findAll();
+    }
+
+    public function getLicenzeById($idLicenza)
+    {   //Sto cercando per chiave primaria pertanto non serve il where
+        return $this->find($idLicenza);
     }
 
     public function salva($data)
     {
         log_message('info', 'Ricevo i seguenti dati: ' . json_encode($data));
-        $query = $this->query("SELECT nextval('nrg.s_tblic_id') AS next_id");
-        $nextId = $query->getRow()->next_id;
-        log_message('info', 'e aggiungo il prossimo ID per la licenza: ' . $nextId);
-        // Salva i dati della lice nza nel database
-        $this->insert([
-            'tblic_id_pk' => $nextId,
-            'tblic_cd' => $data['tblic_cd'],
-            'tblic_desc' => $data['tblic_desc'],
-            'tblic_tp' => $data['tblic_tp'],
-            'tblic_stato' => 't', // Imposta lo stato iniziale come attivo
-        ], true);
-
-        return $this->getInsertID(); // Restituisce l'ID della nuova licenza
+        if (isset($data['tblic_id_pk'])) {
+            // Se l'ID è presente, aggiorna la licenza esistente
+            $this->update($data['tblic_id_pk'], $data);
+            return $data['tblic_id_pk']; // Restituisce l'ID della licenza aggiornata
+        } else {
+            // Altrimenti, crea una nuova licenza
+            // Recupero il prossimo ID per la licenza
+            $nextId = null;
+            $query = $this->query("SELECT nextval('nrg.s_tblic_id') AS next_id");
+            $nextId = $query->getRow()->next_id;
+            log_message('info', 'e aggiungo il prossimo ID per la licenza: ' . $nextId);
+            $data['tblic_id_pk'] = $nextId; // Imposto il nuovo ID nella licenza
+            $data['tblic_stato'] = 't'; // Imposto lo stato iniziale come attivo
+            log_message('info', 'Dati della licenza da inserire: ' . json_encode($data));
+            return $this->insert($data); // Restituisce l'ID della nuova licenza
+        }
 
     }
 }

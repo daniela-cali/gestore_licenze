@@ -46,6 +46,19 @@
 
     <!-- Contenuto principale -->
     <main>
+        <?php log_message('info', 'Flashdata'.session()->getFlashdata('success'));
+        if (session()->getFlashdata('success') !== NULL): 
+            ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php echo session()->getFlashdata('success'); ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php elseif ((session()->getFlashdata('error') !== NULL)): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?php echo session()->getFlashdata('error'); ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
         <?= $this->renderSection('content') ?>
     </main>
 

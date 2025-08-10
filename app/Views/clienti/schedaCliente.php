@@ -63,6 +63,7 @@
                         <table class="table table-bordered table-hover align-middle">
                             <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Codice</th>
                                     <th>Descrizione</th>
                                     <th>Tipo</th>
@@ -73,6 +74,7 @@
                             <tbody>
                                 <?php foreach ($licenze as $licenza): ?>
                                     <tr class="licenza-row" data-id="<?= esc($licenza->tblic_id_pk) ?>" style="cursor:pointer;">
+                                        <td><?= esc($licenza->tblic_id_pk) ?></td>
                                         <td><?= esc($licenza->tblic_cd) ?></td>
                                         <td><?= esc($licenza->tblic_desc) ?></td>
                                         <td><?= esc($licenza->tblic_tp) ?></td>
@@ -82,6 +84,8 @@
                                             </span>
                                         </td>
                                         <td>
+                                            <a href="/licenze/visualizza/<?= $licenza->tblic_id_pk ?>" class="btn btn-sm btn-outline-primary" title="Visualizza">
+                                                <i class="bi bi-eye"></i>
                                             <a href="/licenze/modifica/<?= $licenza->tblic_id_pk ?>" class="btn btn-sm btn-outline-secondary" title="Modifica">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
@@ -154,7 +158,7 @@
                         break;
                     case 'licenze-tab':
                         console.log('Tab Licenze selezionato');
-                        document.getElementById('navigation').setAttribute('href', '/licenze/nuova/<?= esc($cliente->id) ?>');
+                        document.getElementById('navigation').setAttribute('href', '/licenze/crea/<?= esc($cliente->id) ?>');
                         document.getElementById('navigation').innerHTML = '<i class="bi bi-key-fill"></i> Crea Licenza per il cliente';
                         break;
                     case 'aggiornamenti-tab':
