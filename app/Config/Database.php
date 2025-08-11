@@ -78,8 +78,8 @@ class Database extends Config
     public array $superba = [
         'DSN'        => '',
         'hostname'   => 'localhost',
-        'username'   => 'postgres',
-        'password'   => 'postgres',
+        'username'   => 'root',
+        'password'   => 'root',
         'database'   => 'testnrgsrl',
         'schema'     => 'nrg',
         'DBDriver'   => 'Postgre',
